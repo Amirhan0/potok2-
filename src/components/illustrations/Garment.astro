@@ -1,0 +1,31 @@
+---
+import type { GarmentKind } from "../../data/products";
+import type { Tone } from "./garments";
+import GarmentShape from "./GarmentShape.astro";
+
+interface Props {
+  kind: GarmentKind;
+  tone: Tone;
+  class?: string;
+  /** Покачивание вешалки (только при разрешённой анимации) */
+  sway?: boolean;
+}
+
+const { kind, tone, class: className, sway = false } = Astro.props;
+---
+
+<svg viewBox="0 0 200 260" class={className} aria-hidden="true" focusable="false">
+  <g class:list={[sway && "garment-sway"]}>
+    <GarmentShape kind={kind} tone={tone} />
+  </g>
+</svg>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .garment-sway {
+      transform-box: fill-box;
+      transform-origin: 50% 0%;
+      animation: var(--animate-sway);
+    }
+  }
+</style>

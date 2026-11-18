@@ -1,0 +1,33 @@
+---
+// Иллюстрация для подписки: конверт с летящей футболкой
+import GarmentShape from "./GarmentShape.astro";
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg viewBox="0 0 320 280" class={className} aria-hidden="true" focusable="false">
+  <g class="mail-float">
+    <g transform="translate(110 10) scale(0.5) rotate(10 100 130)">
+      <GarmentShape kind="tshirt" tone="coral" hanger={false} />
+    </g>
+  </g>
+  <g stroke="var(--color-navy-900)" stroke-width="4" stroke-linejoin="round">
+    <path d="M50 120 H270 V250 H50 Z" fill="var(--color-blue-400)" />
+    <path d="M50 120 L160 196 L270 120" fill="var(--color-blue-100)" />
+    <path d="M50 250 L134 178 M270 250 L186 178" fill="none" />
+  </g>
+  <path d="M286 60 C287 70 290 73 300 74 C290 75 287 78 286 88 C285 78 282 75 272 74 C282 73 285 70 286 60 Z" fill="var(--color-coral-300)" />
+  <path d="M30 60 C31 66 33 68 39 69 C33 70 31 72 30 78 C29 72 27 70 21 69 C27 68 29 66 30 60 Z" fill="var(--color-blue-100)" />
+  <path d="M20 200 Q2 170 22 150" fill="none" stroke="var(--color-coral-300)" stroke-width="3" stroke-dasharray="4 7" stroke-linecap="round" />
+</svg>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .mail-float {
+      animation: var(--animate-float);
+    }
+  }
+</style>

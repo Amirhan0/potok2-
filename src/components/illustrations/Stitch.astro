@@ -1,0 +1,19 @@
+---
+// Волнистая «строчка» — разделитель между секциями
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg viewBox="0 0 1200 40" preserveAspectRatio="none" class={className} aria-hidden="true" focusable="false">
+  <path
+    d="M0 20 Q 50 0 100 20 T 200 20 T 300 20 T 400 20 T 500 20 T 600 20 T 700 20 T 800 20 T 900 20 T 1000 20 T 1100 20 T 1200 20"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-dasharray="10 10"
+    stroke-linecap="round"
+    vector-effect="non-scaling-stroke"
+  />
+</svg>

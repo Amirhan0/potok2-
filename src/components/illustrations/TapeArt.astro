@@ -1,0 +1,48 @@
+---
+// Иллюстрация для секции стилиста: манекен с сантиметровой лентой
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+const ticks = Array.from({ length: 13 }, (_, i) => i);
+---
+
+<svg viewBox="0 0 400 460" class={className} aria-hidden="true" focusable="false">
+  <path d="M352 250c-10 96-96 170-186 160S20 320 34 230 120 52 210 56s152 98 142 194Z" fill="var(--color-blue-600)" opacity="0.35" />
+
+  <!-- манекен -->
+  <g stroke="var(--color-navy-900)" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M200 40 V64" fill="none" />
+    <circle cx="200" cy="34" r="10" fill="var(--color-coral-500)" />
+    <path
+      d="M150 72 Q200 60 250 72 Q282 84 276 132 Q268 176 252 200 Q244 222 258 262 Q270 300 246 330 H154 Q130 300 142 262 Q156 222 148 200 Q132 176 124 132 Q118 84 150 72 Z"
+      fill="var(--color-cream-50)"
+    />
+    <path d="M200 330 V398 M150 420 Q200 396 250 420" fill="none" />
+  </g>
+  <path d="M200 76 V326" stroke="var(--color-blue-400)" stroke-width="2" stroke-dasharray="6 8" />
+
+  <!-- сантиметровая лента вокруг талии -->
+  <g>
+    <path d="M136 204 Q200 226 264 204 L268 224 Q200 248 132 224 Z" fill="var(--color-coral-500)" stroke="var(--color-navy-900)" stroke-width="3" stroke-linejoin="round" />
+    {
+      ticks.map((i) => {
+        const x = 144 + i * 9.5;
+        const y = 213 + Math.sin((i / 12) * Math.PI) * 10;
+        return <path d={`M${x} ${y} v${i % 2 ? 5 : 9}`} stroke="var(--color-navy-900)" stroke-width="2" />;
+      })
+    }
+    <path d="M266 214 Q318 230 308 290 Q302 320 326 344" fill="none" stroke="var(--color-coral-500)" stroke-width="18" stroke-linecap="round" />
+    <path d="M266 214 Q318 230 308 290 Q302 320 326 344" fill="none" stroke="var(--color-navy-900)" stroke-width="2" stroke-dasharray="2 8" />
+  </g>
+
+  <!-- ножницы -->
+  <g transform="translate(46 300) rotate(-24)" stroke="var(--color-navy-900)" stroke-width="4" stroke-linecap="round" fill="none">
+    <circle cx="14" cy="14" r="12" fill="var(--color-blue-100)" />
+    <circle cx="14" cy="50" r="12" fill="var(--color-blue-100)" />
+    <path d="M24 20 L84 40 M24 44 L84 24" />
+  </g>
+
+  <path d="M330 70 C331 82 334 85 346 86 C334 87 331 90 330 102 C329 90 326 87 314 86 C326 85 329 82 330 70 Z" fill="var(--color-coral-300)" />
+  <path d="M70 110 C71 118 73 120 81 121 C73 122 71 124 70 132 C69 124 67 122 59 121 C67 120 69 118 70 110 Z" fill="var(--color-blue-100)" />
+</svg>
