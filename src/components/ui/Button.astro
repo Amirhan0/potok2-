@@ -5,7 +5,7 @@ type Variant = "primary" | "accent" | "ghost" | "light";
 
 type Props = {
   variant?: Variant;
-  size?: "md" | "lg";
+  size?: "sm" | "md" | "lg";
   class?: string;
 } & (
   | ({ href: string } & Omit<HTMLAttributes<"a">, "class">)
@@ -23,6 +23,7 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes = {
+  sm: "px-4 py-2 text-xs",
   md: "px-6 py-3 text-sm",
   lg: "px-8 py-4 text-base",
 };
