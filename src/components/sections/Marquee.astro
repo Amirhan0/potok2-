@@ -1,0 +1,39 @@
+---
+import Sparkle from "../illustrations/Sparkle.astro";
+
+const words = [
+  "Новая коллекция",
+  "Натуральные ткани",
+  "Примерка перед оплатой",
+  "Доставка за 1 день",
+  "Стилист бесплатно",
+];
+---
+
+<div class="overflow-hidden bg-blue-600 py-5 text-white" aria-hidden="true">
+  <div class="marquee flex w-max gap-8">
+    {[0, 1].map(() => (
+      <ul class="flex shrink-0 items-center gap-8">
+        {words.map((w) => (
+          <li class="flex items-center gap-8 font-display text-lg font-semibold whitespace-nowrap md:text-2xl">
+            {w}
+            <Sparkle class="size-5 text-coral-300" />
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    .marquee {
+      animation: marquee 30s linear infinite;
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(calc(-50% - 1rem));
+    }
+  }
+</style>

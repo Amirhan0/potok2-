@@ -1,12 +1,31 @@
 ---
 import Base from "../layouts/Base.astro";
+import Header from "../components/sections/Header.astro";
+import Hero from "../components/sections/Hero.astro";
+import Collection from "../components/sections/Collection.astro";
+import Marquee from "../components/sections/Marquee.astro";
+import Benefits from "../components/sections/Benefits.astro";
+import Consult from "../components/sections/Consult.astro";
+import Reviews from "../components/sections/Reviews.astro";
+import Subscribe from "../components/sections/Subscribe.astro";
+import Faq from "../components/sections/Faq.astro";
+import Footer from "../components/sections/Footer.astro";
 ---
 
 <Base
-  title="ПОТОК — магазин одежды"
-  description="Одежда, в которой удобно жить: новые коллекции, подбор образа и консультация стилиста."
+  title="ПОТОК — магазин одежды из натуральных тканей"
+  description="Новая коллекция одежды из натуральных тканей. Бесплатная консультация стилиста, подбор размера, доставка за 1 день и примерка перед оплатой."
 >
-  <main id="main" class="mx-auto max-w-7xl px-5 py-20 md:px-8">
-    <h1 class="font-display text-5xl text-blue-600">ПОТОК</h1>
+  <Header />
+  <main id="main">
+    <Hero />
+    <Collection />
+    <Marquee />
+    <Benefits />
+    <Consult />
+    <Reviews />
+    <Subscribe />
+    <Faq />
   </main>
+  <Footer />
 </Base>

@@ -1,0 +1,26 @@
+---
+import { benefits } from "../../data/benefits";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Icon from "../illustrations/Icon.astro";
+---
+
+<section id="benefits" aria-labelledby="benefits-title" class="bg-white py-20 md:py-28">
+  <div class="mx-auto max-w-7xl px-5 md:px-8">
+    <SectionHeading id="benefits-title" eyebrow="Почему мы" title="Покупать одежду — просто" />
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {benefits.map((b, i) => (
+        <li
+          class="group rounded-card border-2 border-blue-100 bg-cream-50 p-7 transition-colors hover:border-blue-400"
+          data-reveal
+          style={`transition-delay:${i * 80}ms`}
+        >
+          <div class="mb-6 flex size-14 items-center justify-center rounded-2xl bg-blue-600 text-white transition-transform group-hover:-rotate-6">
+            <Icon name={b.icon} class="size-7" />
+          </div>
+          <h3 class="mb-3 text-lg font-bold">{b.title}</h3>
+          <p class="leading-relaxed text-ink-500">{b.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

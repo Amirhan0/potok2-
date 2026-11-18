@@ -1,0 +1,85 @@
+---
+import { products, formatPrice } from "../../data/products";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Garment from "../illustrations/Garment.astro";
+import Blob from "../illustrations/Blob.astro";
+import Icon from "../illustrations/Icon.astro";
+
+const cardBg = {
+  navy: "bg-blue-100",
+  coral: "bg-coral-300/35",
+  blue: "bg-blue-100",
+  sky: "bg-coral-300/35",
+} as const;
+
+const badgeClass = {
+  New: "bg-blue-600 text-white",
+  Sale: "bg-coral-500 text-navy-900",
+  Хит: "bg-navy-900 text-white",
+} as const;
+---
+
+<section id="collection" aria-labelledby="collection-title" class="py-20 md:py-28">
+  <div class="mx-auto max-w-7xl px-5 md:px-8">
+    <SectionHeading
+      id="collection-title"
+      eyebrow="Коллекция"
+      title="Новинки сезона"
+      lead="Базовые вещи и акцентные модели, которые легко сочетаются между собой."
+    />
+
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {products.map((p, i) => (
+        <li data-reveal style={`transition-delay:${(i % 3) * 80}ms`}>
+          <article class="group relative flex h-full flex-col rounded-card bg-white p-4 shadow-sm shadow-blue-900/5 transition-shadow hover:shadow-xl hover:shadow-blue-900/10">
+            <div
+              class:list={[
+                "relative flex aspect-[4/4.2] items-center justify-center overflow-hidden rounded-2xl",
+                cardBg[p.tone],
+              ]}
+            >
+              <Blob
+                variant={((i % 3) + 1) as 1 | 2 | 3}
+                class="absolute inset-[8%] text-white/70 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
+              />
+              <Garment
+                kind={p.kind}
+                tone={p.tone}
+                sway
+                class="relative h-[82%] w-auto transition-transform duration-500 group-hover:-translate-y-1"
+              />
+              {p.badge && (
+                <span
+                  class:list={["absolute top-4 left-4 rounded-full px-3 py-1 text-xs font-bold", badgeClass[p.badge]]}
+                >
+                  {p.badge}
+                </span>
+              )}
+            </div>
+            <div class="flex flex-1 items-end justify-between gap-4 px-2 pt-5 pb-2">
+              <div>
+                <h3 class="text-lg font-bold">{p.name}</h3>
+                <p class="mt-1 flex items-baseline gap-2">
+                  <span class="font-display text-xl font-semibold text-blue-700">{formatPrice(p.price)}</span>
+                  {p.oldPrice && (
+                    <s class="text-sm text-ink-500">
+                      <span class="sr-only">Старая цена:</span>
+                      {formatPrice(p.oldPrice)}
+                    </s>
+                  )}
+                </p>
+              </div>
+              <a
+                href="#consult"
+                class="flex size-12 shrink-0 items-center justify-center rounded-full bg-navy-900 text-white transition-colors group-hover:bg-coral-500 group-hover:text-navy-900 after:absolute after:inset-0 after:rounded-card"
+                aria-label={`Заказать примерку: ${p.name}`}
+              >
+                <Icon name="arrow" class="size-5 -rotate-45" />
+              </a>
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

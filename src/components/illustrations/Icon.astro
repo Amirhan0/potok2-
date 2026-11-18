@@ -1,6 +1,20 @@
 ---
 interface Props {
-  name: "truck" | "ruler" | "leaf" | "return" | "star" | "arrow" | "phone" | "mail" | "pin" | "clock" | "menu" | "close" | "send" | "check";
+  name:
+    | "truck"
+    | "ruler"
+    | "leaf"
+    | "return"
+    | "star"
+    | "arrow"
+    | "phone"
+    | "mail"
+    | "pin"
+    | "clock"
+    | "menu"
+    | "close"
+    | "send"
+    | "check";
   class?: string;
 }
 const { name, class: className } = Astro.props;

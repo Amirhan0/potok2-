@@ -24,7 +24,16 @@ const hangers = [
     fill="var(--color-blue-100)"
   />
   <circle cx="458" cy="96" r="56" fill="var(--color-coral-300)" />
-  <circle cx="458" cy="96" r="56" fill="none" stroke="var(--color-coral-500)" stroke-width="3" stroke-dasharray="6 8" class="hero-spin" />
+  <circle
+    cx="458"
+    cy="96"
+    r="56"
+    fill="none"
+    stroke="var(--color-coral-500)"
+    stroke-width="3"
+    stroke-dasharray="6 8"
+    class="hero-spin"
+  />
 
   <!-- стойка -->
   <g stroke="var(--color-navy-900)" stroke-width="6" stroke-linecap="round" fill="none">
@@ -38,39 +47,77 @@ const hangers = [
   <circle cx="520" cy="514" r="10" fill="var(--color-blue-600)" />
 
   <!-- вещи на вешалках -->
-  {
-    hangers.map((h) => (
-      <g transform={`translate(${h.x - 100} 106)`}>
-        <g class="hero-sway" style={`animation-delay:${h.delay}`}>
-          <GarmentShape kind={h.kind} tone={h.tone} />
-        </g>
+  {hangers.map((h) => (
+    <g transform={`translate(${h.x - 100} 106)`}>
+      <g class="hero-sway" style={`animation-delay:${h.delay}`}>
+        <GarmentShape kind={h.kind} tone={h.tone} />
       </g>
-    ))
-  }
+    </g>
+  ))}
 
   <!-- ценник -->
   <g class="hero-sway" style="animation-delay:-1s">
     <path d="M206 120 Q204 150 196 170" stroke="var(--color-navy-900)" stroke-width="2" fill="none" />
     <g transform="rotate(-14 196 196)">
-      <path d="M170 172 H222 V228 L196 244 L170 228 Z" fill="var(--color-cream-50)" stroke="var(--color-navy-900)" stroke-width="3" stroke-linejoin="round" />
+      <path
+        d="M170 172 H222 V228 L196 244 L170 228 Z"
+        fill="var(--color-cream-50)"
+        stroke="var(--color-navy-900)"
+        stroke-width="3"
+        stroke-linejoin="round"
+      />
       <circle cx="196" cy="184" r="4" fill="var(--color-navy-900)" />
-      <text x="196" y="214" text-anchor="middle" font-family="Unbounded Variable, sans-serif" font-size="15" font-weight="700" fill="var(--color-blue-600)">NEW</text>
+      <text
+        x="196"
+        y="214"
+        text-anchor="middle"
+        font-family="Unbounded Variable, sans-serif"
+        font-size="15"
+        font-weight="700"
+        fill="var(--color-blue-600)"
+      >
+        NEW
+      </text>
     </g>
   </g>
 
   <!-- пакет -->
   <g transform="translate(372 400)">
-    <path d="M30 24 Q30 -6 52 -6 Q74 -6 74 24" fill="none" stroke="var(--color-navy-900)" stroke-width="5" stroke-linecap="round" />
-    <path d="M10 20 H94 L102 112 H2 Z" fill="var(--color-coral-500)" stroke="var(--color-navy-900)" stroke-width="3" stroke-linejoin="round" />
+    <path
+      d="M30 24 Q30 -6 52 -6 Q74 -6 74 24"
+      fill="none"
+      stroke="var(--color-navy-900)"
+      stroke-width="5"
+      stroke-linecap="round"
+    />
+    <path
+      d="M10 20 H94 L102 112 H2 Z"
+      fill="var(--color-coral-500)"
+      stroke="var(--color-navy-900)"
+      stroke-width="3"
+      stroke-linejoin="round"
+    />
     <path d="M22 62 Q52 82 82 62" fill="none" stroke="var(--color-cream-50)" stroke-width="4" stroke-linecap="round" />
   </g>
 
   <!-- блики -->
   <g fill="var(--color-blue-600)">
-    <path class="hero-twinkle" d="M120 44 C121 54 124 57 134 58 C124 59 121 62 120 72 C119 62 116 59 106 58 C116 57 119 54 120 44 Z" />
-    <path class="hero-twinkle" style="animation-delay:-1.5s" d="M520 300 C521 308 523 310 531 311 C523 312 521 314 520 322 C519 314 517 312 509 311 C517 310 519 308 520 300 Z" />
+    <path
+      class="hero-twinkle"
+      d="M120 44 C121 54 124 57 134 58 C124 59 121 62 120 72 C119 62 116 59 106 58 C116 57 119 54 120 44 Z"
+    />
+    <path
+      class="hero-twinkle"
+      style="animation-delay:-1.5s"
+      d="M520 300 C521 308 523 310 531 311 C523 312 521 314 520 322 C519 314 517 312 509 311 C517 310 519 308 520 300 Z"
+    />
   </g>
-  <path class="hero-twinkle" style="animation-delay:-0.7s" d="M300 470 C301 480 304 483 314 484 C304 485 301 488 300 498 C299 488 296 485 286 484 C296 483 299 480 300 470 Z" fill="var(--color-coral-500)" />
+  <path
+    class="hero-twinkle"
+    style="animation-delay:-0.7s"
+    d="M300 470 C301 480 304 483 314 484 C304 485 301 488 300 498 C299 488 296 485 286 484 C296 483 299 480 300 470 Z"
+    fill="var(--color-coral-500)"
+  />
 </svg>
 
 <style>

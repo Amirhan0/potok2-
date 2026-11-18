@@ -1,0 +1,149 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import Field from "../ui/Field.astro";
+import Checkbox from "../ui/Checkbox.astro";
+import Form from "../ui/Form.astro";
+import FormStatus from "../ui/FormStatus.astro";
+import SubmitButton from "../ui/SubmitButton.astro";
+import TapeArt from "../illustrations/TapeArt.astro";
+import Icon from "../illustrations/Icon.astro";
+
+const perks = ["Бесплатно и без обязательств", "Размер под конкретную модель", "Подборка образов в Telegram"];
+---
+
+<section
+  id="consult"
+  aria-labelledby="consult-title"
+  class="relative overflow-hidden bg-blue-700 py-20 text-white md:py-28"
+>
+  <div
+    class="pointer-events-none absolute -top-40 -right-40 size-[28rem] rounded-full bg-blue-600"
+    aria-hidden="true"
+  ></div>
+  <div class="relative mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+    <div>
+      <SectionHeading
+        id="consult-title"
+        eyebrow="Стилист"
+        title="Подберём размер и образ по вашим меркам"
+        lead="Расскажите о себе — стилист свяжется с вами, уточнит детали и предложит вещи, которые точно подойдут."
+        align="left"
+        tone="dark"
+      />
+      <ul class="-mt-4 mb-10 space-y-3">
+        {perks.map((p) => (
+          <li class="flex items-center gap-3 font-semibold">
+            <span class="flex size-7 items-center justify-center rounded-full bg-coral-500 text-navy-900">
+              <Icon name="check" class="size-4" />
+            </span>
+            {p}
+          </li>
+        ))}
+      </ul>
+      <TapeArt class="mx-auto hidden w-full max-w-sm lg:block" />
+    </div>
+
+    <div class="rounded-card bg-white p-6 text-navy-900 shadow-2xl shadow-navy-900/30 md:p-10" data-reveal>
+      <Form
+        name="consult"
+        label="Заявка на консультацию стилиста"
+        success="Заявка принята! Стилист напишет вам в течение часа."
+      >
+        <div class="grid gap-x-5 gap-y-1 sm:grid-cols-2">
+          <Field
+            id="consult-name"
+            name="name"
+            label="Имя"
+            autocomplete="name"
+            required
+            minlength={2}
+            placeholder="Анна"
+          />
+          <Field
+            id="consult-phone"
+            name="phone"
+            type="tel"
+            label="Телефон"
+            autocomplete="tel"
+            inputmode="tel"
+            required
+            placeholder="+7 (900) 000-00-00"
+          />
+        </div>
+
+        <fieldset class="mt-2">
+          <legend class="mb-3 text-sm font-semibold">
+            Мерки, см <span class="font-normal text-ink-500">(если знаете)</span>
+          </legend>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-4">
+            <Field
+              id="consult-height"
+              optionalMark={false}
+              name="height"
+              type="number"
+              inputmode="numeric"
+              label="Рост"
+              min="120"
+              max="220"
+              placeholder="170"
+            />
+            <Field
+              id="consult-chest"
+              optionalMark={false}
+              name="chest"
+              type="number"
+              inputmode="numeric"
+              label="Грудь"
+              min="60"
+              max="160"
+              placeholder="90"
+            />
+            <Field
+              id="consult-waist"
+              optionalMark={false}
+              name="waist"
+              type="number"
+              inputmode="numeric"
+              label="Талия"
+              min="50"
+              max="150"
+              placeholder="70"
+            />
+            <Field
+              id="consult-hips"
+              optionalMark={false}
+              name="hips"
+              type="number"
+              inputmode="numeric"
+              label="Бёдра"
+              min="60"
+              max="170"
+              placeholder="96"
+            />
+          </div>
+        </fieldset>
+
+        <Field
+          id="consult-comment"
+          name="comment"
+          as="textarea"
+          label="Комментарий"
+          placeholder="Например: ищу пальто на осень, люблю спокойные цвета"
+          class="mt-1"
+        />
+
+        <Checkbox id="consult-agree" name="agree" required class="mt-1">
+          Согласен(на) на{" "}
+          <a href="#privacy" class="font-semibold text-blue-700 underline">
+            обработку персональных данных
+          </a>
+        </Checkbox>
+
+        <div class="mt-3 flex flex-wrap items-center gap-4">
+          <SubmitButton class="w-full sm:w-auto">Записаться к стилисту</SubmitButton>
+          <FormStatus />
+        </div>
+      </Form>
+    </div>
+  </div>
+</section>

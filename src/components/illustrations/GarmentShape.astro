@@ -15,8 +15,19 @@ const color = toneColors[tone];
 ---
 
 <g>
-  {hanger && <path d={hangerPath} fill="none" stroke="var(--color-navy-900)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />}
+  {hanger && (
+    <path
+      d={hangerPath}
+      fill="none"
+      stroke="var(--color-navy-900)"
+      stroke-width="4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  )}
   <path d={shape.body} fill={color.fill} stroke="var(--color-navy-900)" stroke-width="3" stroke-linejoin="round" />
   <path d={shape.details} fill="none" stroke={color.line} stroke-width="2.5" stroke-linecap="round" opacity="0.85" />
-  {shape.dots?.map(([cx, cy]) => <circle cx={cx} cy={cy} r="4" fill={color.line} />)}
+  {shape.dots?.map(([cx, cy]) => (
+    <circle cx={cx} cy={cy} r="4" fill={color.line} />
+  ))}
 </g>

@@ -1,0 +1,43 @@
+---
+import { reviews } from "../../data/reviews";
+import SectionHeading from "../ui/SectionHeading.astro";
+import Icon from "../illustrations/Icon.astro";
+---
+
+<section id="reviews" aria-labelledby="reviews-title" class="py-20 md:py-28">
+  <div class="mx-auto max-w-7xl px-5 md:px-8">
+    <SectionHeading id="reviews-title" eyebrow="Отзывы" title="Что говорят покупатели" />
+    <!-- На мобильных — горизонтальная прокрутка со scroll-snap, на десктопе — сетка -->
+    <ul class="-mx-5 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
+      {reviews.map((r, i) => (
+        <li class="w-[85%] shrink-0 snap-center md:w-auto" data-reveal style={`transition-delay:${i * 80}ms`}>
+          <figure
+            class:list={["flex h-full flex-col rounded-card p-7", i === 1 ? "bg-navy-900 text-white" : "bg-white"]}
+          >
+            <div class="mb-5 flex gap-1 text-coral-500" role="img" aria-label={`Оценка ${r.rating} из 5`}>
+              {Array.from({ length: 5 }, (_, s) => (
+                <Icon name="star" class:list={["size-5", s >= r.rating && "opacity-25"]} />
+              ))}
+            </div>
+            <blockquote class="flex-1 text-lg leading-relaxed">«{r.text}»</blockquote>
+            <figcaption class="mt-6 flex items-center gap-3">
+              <span
+                class:list={[
+                  "flex size-11 items-center justify-center rounded-full font-display font-bold",
+                  i === 1 ? "bg-coral-500 text-navy-900" : "bg-blue-100 text-blue-700",
+                ]}
+                aria-hidden="true"
+              >
+                {r.name[0]}
+              </span>
+              <span>
+                <span class="block font-bold">{r.name}</span>
+                <span class:list={["text-sm", i === 1 ? "text-blue-100" : "text-ink-500"]}>{r.city}</span>
+              </span>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

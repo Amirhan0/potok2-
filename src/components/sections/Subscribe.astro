@@ -1,0 +1,50 @@
+---
+import Field from "../ui/Field.astro";
+import Checkbox from "../ui/Checkbox.astro";
+import Form from "../ui/Form.astro";
+import FormStatus from "../ui/FormStatus.astro";
+import SubmitButton from "../ui/SubmitButton.astro";
+import MailArt from "../illustrations/MailArt.astro";
+---
+
+<section aria-labelledby="subscribe-title" class="px-5 pb-20 md:px-8 md:pb-28">
+  <div
+    class="relative mx-auto grid max-w-6xl items-center gap-8 overflow-hidden rounded-[2rem] bg-navy-900 p-8 text-white md:grid-cols-[1fr_1.2fr] md:p-14"
+    data-reveal
+  >
+    <MailArt class="mx-auto w-full max-w-xs" />
+    <div>
+      <h2 id="subscribe-title" class="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] leading-tight font-semibold">
+        Новинки и&nbsp;закрытые распродажи — первыми
+      </h2>
+      <p class="mt-4 text-blue-100">Одно письмо в неделю. Подписчикам — скидка 15% на первый заказ.</p>
+      <Form name="subscribe" label="Подписка на новинки" success="Готово! Проверьте почту — там промокод." class="mt-8">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-start [&_label]:text-white [&_label_span]:text-blue-100 [&_[data-error]]:text-coral-300">
+          <Field
+            id="subscribe-email"
+            name="email"
+            type="email"
+            label="Email"
+            autocomplete="email"
+            inputmode="email"
+            required
+            placeholder="name@mail.ru"
+            class="flex-1"
+          />
+          <SubmitButton variant="accent" class="sm:mt-7">
+            Подписаться
+          </SubmitButton>
+        </div>
+        <div class="mt-2 sm:mt-0 [&_label]:text-blue-100 [&_a]:text-white [&_[data-error]]:text-coral-300">
+          <Checkbox id="subscribe-agree" name="agree" required>
+            Согласен(на) получать рассылку и с{" "}
+            <a href="#privacy" class="underline">
+              политикой конфиденциальности
+            </a>
+          </Checkbox>
+        </div>
+        <FormStatus tone="dark" />
+      </Form>
+    </div>
+  </div>
+</section>

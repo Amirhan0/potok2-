@@ -1,0 +1,132 @@
+---
+import Button from "../ui/Button.astro";
+import Field from "../ui/Field.astro";
+import Form from "../ui/Form.astro";
+import FormStatus from "../ui/FormStatus.astro";
+import SubmitButton from "../ui/SubmitButton.astro";
+import HeroArt from "../illustrations/HeroArt.astro";
+import Sparkle from "../illustrations/Sparkle.astro";
+import Icon from "../illustrations/Icon.astro";
+
+const styles = [
+  { value: "casual", label: "Повседневный" },
+  { value: "office", label: "Офисный" },
+  { value: "evening", label: "Вечерний" },
+  { value: "sport", label: "Спортивный" },
+];
+
+const stats = [
+  { value: "12 000+", label: "довольных клиентов" },
+  { value: "1 день", label: "доставка по Москве" },
+  { value: "4.9", label: "средняя оценка" },
+];
+---
+
+<section id="top" aria-labelledby="hero-title" class="relative overflow-hidden">
+  <Sparkle class="absolute top-24 left-[46%] hidden size-6 text-coral-500 lg:block" />
+  <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 pt-10 pb-28 md:px-8 md:pt-16 lg:grid-cols-[1.05fr_1fr] lg:pb-36">
+    <div>
+      <p class="mb-6 inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 text-xs font-bold tracking-widest text-blue-700 uppercase">
+        <span class="size-1.5 rounded-full bg-coral-500" aria-hidden="true"></span>
+        Новая коллекция · Зима 2026
+      </p>
+      <h1 id="hero-title" class="font-display text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.02] font-bold tracking-tight">
+        Одежда, в&nbsp;которой
+        <span class="relative inline-block text-blue-600">
+          легко
+          <svg
+            viewBox="0 0 220 20"
+            class="absolute -bottom-2 left-0 w-full text-coral-500"
+            aria-hidden="true"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M4 14 Q 60 2 110 10 T 216 8"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="6"
+              stroke-linecap="round"
+            ></path>
+          </svg>
+        </span>
+        быть собой
+      </h1>
+      <p class="mt-7 max-w-xl text-lg leading-relaxed text-ink-500 md:text-xl">
+        Натуральные ткани, честный крой и&nbsp;стилист, который поможет собрать гардероб под ваш ритм жизни.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-4">
+        <Button href="#collection" variant="accent" size="lg">
+          Смотреть коллекцию
+          <Icon name="arrow" class="size-5" />
+        </Button>
+        <Button href="#consult" variant="ghost" size="lg">
+          Консультация стилиста
+        </Button>
+      </div>
+      <dl class="mt-12 grid max-w-lg grid-cols-3 gap-4">
+        {stats.map((s) => (
+          <div class="border-l-2 border-blue-400 pl-4">
+            <dt class="sr-only">{s.label}</dt>
+            <dd class="font-display text-xl font-bold whitespace-nowrap text-navy-900 sm:text-2xl md:text-3xl">
+              {s.value}
+            </dd>
+            <dd class="mt-1 text-sm text-ink-500">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+
+    <div class="relative mx-auto w-full max-w-xl">
+      <HeroArt class="h-auto w-full" />
+      <div class="absolute bottom-[14%] -left-2 hidden rotate-[-6deg] rounded-2xl bg-white px-4 py-3 shadow-xl shadow-blue-900/10 sm:block">
+        <p class="text-xs font-semibold text-ink-500">Скидка на первый заказ</p>
+        <p class="font-display text-2xl font-bold text-coral-500">−15%</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Быстрая заявка «Подобрать образ» — карточка, наезжающая на hero -->
+<div id="pick" class="relative z-10 mx-auto -mt-20 max-w-6xl px-5 md:px-8">
+  <div class="rounded-card bg-navy-900 p-6 text-white shadow-2xl shadow-blue-900/30 md:p-8" data-reveal>
+    <div class="mb-6 flex flex-wrap items-end justify-between gap-2">
+      <h2 class="font-display text-xl font-semibold md:text-2xl">Подберём образ за 15 минут</h2>
+      <p class="text-sm text-blue-100">Перезвоним и пришлём 3 готовых комплекта</p>
+    </div>
+    <Form name="pick" label="Подобрать образ" success="Спасибо! Стилист перезвонит в течение 15 минут.">
+      <div class="grid items-start gap-x-4 gap-y-1 md:grid-cols-2 lg:grid-cols-[1fr_1fr_1fr_auto] [&_label]:text-white [&_label_span]:text-blue-100 [&_[data-error]]:text-coral-300">
+        <Field
+          id="pick-name"
+          name="name"
+          label="Имя"
+          autocomplete="given-name"
+          required
+          minlength={2}
+          placeholder="Анна"
+        />
+        <Field
+          id="pick-phone"
+          name="phone"
+          type="tel"
+          label="Телефон"
+          autocomplete="tel"
+          inputmode="tel"
+          required
+          placeholder="+7 (900) 000-00-00"
+        />
+        <Field id="pick-style" name="style" as="select" label="Стиль" options={styles} required />
+        <SubmitButton variant="accent" class="mt-7 w-full lg:w-auto">
+          Подобрать
+        </SubmitButton>
+      </div>
+      <FormStatus tone="dark" class="mt-2" />
+      <p class="mt-1 text-xs text-blue-100/80">
+        Нажимая кнопку, вы соглашаетесь с{" "}
+        <a href="#privacy" class="underline hover:text-white">
+          политикой обработки данных
+        </a>
+        .
+      </p>
+    </Form>
+  </div>
+</div>
