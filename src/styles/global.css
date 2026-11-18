@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-900: #0b1f4d;
+  --color-blue-700: #1e40af;
+  --color-blue-600: #2563eb;
+  --color-blue-400: #60a5fa;
+  --color-blue-100: #dbeafe;
+  --color-coral-500: #ff7a59;
+  --color-coral-300: #ffb49e;
+  --color-cream-50: #fff8f1;
+  --color-ink-500: #475569;
+
+  --font-display: "Unbounded Variable", system-ui, sans-serif;
+  --font-sans: "Manrope Variable", system-ui, sans-serif;
+
+  --radius-card: 1.5rem;
+
+  --animate-sway: sway 6s ease-in-out infinite;
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-spin-slow: spin 18s linear infinite;
+
+  @keyframes sway {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-14px) scale(1.03);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-cream-50 font-sans text-navy-900 antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-600;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Базовые стили полей форм */
+  .field-input {
+    @apply w-full rounded-2xl border-2 border-blue-100 bg-white px-4 py-3 text-base text-navy-900 transition-colors placeholder:text-ink-500/60 hover:border-blue-400 focus:border-blue-600 focus:outline-none;
+  }
+
+  .field-input[aria-invalid="true"] {
+    @apply border-coral-500 bg-coral-300/10;
+  }
+}
+
+/* Появление блоков при скролле (класс добавляет скрипт) */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease;
+  }
+
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
