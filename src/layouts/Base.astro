@@ -55,7 +55,17 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
 
     <script is:inline>
-      document.documentElement.classList.add("js");
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js");
+        // Тему ставим до отрисовки, чтобы не было вспышки светлой темы
+        var saved = null;
+        try {
+          saved = localStorage.getItem("theme");
+        } catch (e) {}
+        var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        root.dataset.theme = dark ? "dark" : "light";
+      })();
     </script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>

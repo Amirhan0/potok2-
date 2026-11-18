@@ -2,11 +2,12 @@
 import { site } from "../../data/site";
 import Button from "../ui/Button.astro";
 import Icon from "../illustrations/Icon.astro";
+import ThemeToggle from "../ui/ThemeToggle.astro";
 ---
 
-<header class="sticky top-0 z-40 border-b border-blue-100/80 bg-cream-50/85 backdrop-blur-md">
+<header class="sticky top-0 z-40 border-b border-line/80 bg-page/85 backdrop-blur-md">
   <div class="mx-auto flex h-18 max-w-7xl items-center justify-between gap-6 px-5 md:px-8">
-    <a href="#top" class="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight text-navy-900">
+    <a href="#top" class="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight text-fg">
       <img src="/favicon.svg" alt="" width="36" height="36" class="size-9" />
       {site.name}
     </a>
@@ -17,7 +18,7 @@ import Icon from "../illustrations/Icon.astro";
           <li>
             <a
               href={item.href}
-              class="relative py-2 text-navy-900 transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-coral-500 after:transition-transform hover:text-blue-700 hover:after:scale-x-100"
+              class="relative py-2 text-fg transition-colors after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-coral-500 after:transition-transform hover:text-link hover:after:scale-x-100"
             >
               {item.label}
             </a>
@@ -27,17 +28,19 @@ import Icon from "../illustrations/Icon.astro";
     </nav>
 
     <div class="flex items-center gap-3">
-      <a href={site.phoneHref} class="hidden text-sm font-bold text-navy-900 hover:text-blue-700 md:block">
+      <a href={site.phoneHref} class="hidden text-sm font-bold text-fg hover:text-link md:block">
         {site.phone}
       </a>
-      <Button href="#pick" class="hidden md:inline-flex">
-        Подобрать образ
-      </Button>
+      <ThemeToggle />
+      <!-- display задаём на обёртке: у Button свой inline-flex, который перебивает hidden -->
+      <div class="hidden md:block">
+        <Button href="#pick">Подобрать образ</Button>
+      </div>
 
       <!-- Мобильное меню на <details>: работает без JS -->
       <details class="group relative lg:hidden">
         <summary
-          class="flex size-11 cursor-pointer list-none items-center justify-center rounded-full bg-navy-900 text-white [&::-webkit-details-marker]:hidden"
+          class="flex size-11 cursor-pointer list-none items-center justify-center rounded-full bg-navy-900 text-white dark:bg-blue-600 [&::-webkit-details-marker]:hidden"
           aria-label="Меню"
         >
           <Icon name="menu" class="size-5 group-open:hidden" />
@@ -45,18 +48,18 @@ import Icon from "../illustrations/Icon.astro";
         </summary>
         <nav
           aria-label="Мобильная навигация"
-          class="absolute top-14 right-0 w-64 rounded-card border border-blue-100 bg-white p-3 shadow-2xl shadow-blue-900/15"
+          class="absolute top-14 right-0 w-64 rounded-card border border-line bg-surface p-3 shadow-2xl shadow-blue-900/15"
         >
           <ul class="flex flex-col">
             {site.nav.map((item) => (
               <li>
-                <a href={item.href} class="block rounded-xl px-4 py-3 font-semibold hover:bg-blue-100" data-close-menu>
+                <a href={item.href} class="block rounded-xl px-4 py-3 font-semibold hover:bg-tint" data-close-menu>
                   {item.label}
                 </a>
               </li>
             ))}
-            <li class="mt-2 border-t border-blue-100 pt-3">
-              <a href={site.phoneHref} class="block px-4 py-2 font-bold text-blue-700">
+            <li class="mt-2 border-t border-line pt-3">
+              <a href={site.phoneHref} class="block px-4 py-2 font-bold text-link">
                 {site.phone}
               </a>
             </li>

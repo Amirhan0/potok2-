@@ -14,7 +14,7 @@ const { tone = "light", class: className } = Astro.props;
     "min-h-6 text-sm font-semibold",
     tone === "dark"
       ? "text-blue-100 group-data-[state=error]/form:text-coral-300"
-      : "text-ink-500 group-data-[state=error]/form:text-error-600 group-data-[state=success]/form:text-blue-700",
+      : "text-muted group-data-[state=error]/form:text-error group-data-[state=success]/form:text-link",
     className,
   ]}
 ></p>

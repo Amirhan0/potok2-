@@ -34,14 +34,14 @@ const describedBy = [hintId, errorId].filter(Boolean).join(" ");
 ---
 
 <div class:list={["flex flex-col gap-1.5", className]} data-field>
-  <label for={id} class="text-sm font-semibold text-navy-900">
+  <label for={id} class="text-sm font-semibold text-fg">
     {label}
     {required ? (
-      <span class="text-blue-600" aria-hidden="true">
+      <span class="text-link" aria-hidden="true">
         *
       </span>
     ) : (
-      optionalMark && <span class="font-normal text-ink-500"> (необязательно)</span>
+      optionalMark && <span class="font-normal text-muted"> (необязательно)</span>
     )}
   </label>
 
@@ -73,9 +73,9 @@ const describedBy = [hintId, errorId].filter(Boolean).join(" ");
   )}
 
   {hint && (
-    <p id={hintId} class="text-xs text-ink-500">
+    <p id={hintId} class="text-xs text-muted">
       {hint}
     </p>
   )}
-  <p id={errorId} class="min-h-5 text-sm font-medium text-error-600" data-error aria-live="polite"></p>
+  <p id={errorId} class="min-h-5 text-sm font-medium text-error" data-error aria-live="polite"></p>
 </div>

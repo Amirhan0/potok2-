@@ -14,10 +14,10 @@ const perks = ["Бесплатно и без обязательств", "Раз�
 <section
   id="consult"
   aria-labelledby="consult-title"
-  class="relative overflow-hidden bg-blue-700 py-20 text-white md:py-28"
+  class="relative overflow-hidden bg-band py-20 text-white md:py-28"
 >
   <div
-    class="pointer-events-none absolute -top-40 -right-40 size-[28rem] rounded-full bg-blue-600"
+    class="pointer-events-none absolute -top-40 -right-40 size-[28rem] rounded-full bg-blue-600 dark:bg-blue-700"
     aria-hidden="true"
   ></div>
   <div class="relative mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
@@ -43,7 +43,7 @@ const perks = ["Бесплатно и без обязательств", "Раз�
       <TapeArt class="mx-auto hidden w-full max-w-sm lg:block" />
     </div>
 
-    <div class="rounded-card bg-white p-6 text-navy-900 shadow-2xl shadow-navy-900/30 md:p-10" data-reveal>
+    <div class="rounded-card bg-surface p-6 text-fg shadow-2xl shadow-navy-900/30 md:p-10" data-reveal>
       <Form
         name="consult"
         label="Заявка на консультацию стилиста"
@@ -73,7 +73,7 @@ const perks = ["Бесплатно и без обязательств", "Раз�
 
         <fieldset class="mt-2">
           <legend class="mb-3 text-sm font-semibold">
-            Мерки, см <span class="font-normal text-ink-500">(если знаете)</span>
+            Мерки, см <span class="font-normal text-muted">(если знаете)</span>
           </legend>
           <div class="grid grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-4">
             <Field
@@ -134,7 +134,7 @@ const perks = ["Бесплатно и без обязательств", "Раз�
 
         <Checkbox id="consult-agree" name="agree" required class="mt-1">
           Согласен(на) на{" "}
-          <a href="#privacy" class="font-semibold text-blue-700 underline">
+          <a href="#privacy" class="font-semibold text-link underline">
             обработку персональных данных
           </a>
         </Checkbox>

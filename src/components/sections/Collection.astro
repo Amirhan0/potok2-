@@ -6,16 +6,16 @@ import Blob from "../illustrations/Blob.astro";
 import Icon from "../illustrations/Icon.astro";
 
 const cardBg = {
-  navy: "bg-blue-100",
-  coral: "bg-coral-300/35",
-  blue: "bg-blue-100",
-  sky: "bg-coral-300/35",
+  navy: "bg-tint",
+  coral: "bg-coral-300/35 dark:bg-coral-500/15",
+  blue: "bg-tint",
+  sky: "bg-coral-300/35 dark:bg-coral-500/15",
 } as const;
 
 const badgeClass = {
   New: "bg-blue-600 text-white",
   Sale: "bg-coral-500 text-navy-900",
-  Хит: "bg-navy-900 text-white",
+  Хит: "bg-navy-900 text-white dark:bg-coral-300 dark:text-navy-900",
 } as const;
 ---
 
@@ -31,7 +31,7 @@ const badgeClass = {
     <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {products.map((p, i) => (
         <li data-reveal style={`transition-delay:${(i % 3) * 80}ms`}>
-          <article class="group relative flex h-full flex-col rounded-card bg-white p-4 shadow-sm shadow-blue-900/5 transition-shadow hover:shadow-xl hover:shadow-blue-900/10">
+          <article class="group relative flex h-full flex-col rounded-card bg-surface p-4 shadow-sm shadow-blue-900/5 transition-shadow hover:shadow-xl hover:shadow-blue-900/10">
             <div
               class:list={[
                 "relative flex aspect-[4/4.2] items-center justify-center overflow-hidden rounded-2xl",
@@ -40,7 +40,7 @@ const badgeClass = {
             >
               <Blob
                 variant={((i % 3) + 1) as 1 | 2 | 3}
-                class="absolute inset-[8%] text-white/70 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6"
+                class="absolute inset-[8%] text-white/70 transition-transform dark:text-white/5 duration-500 group-hover:scale-110 group-hover:rotate-6"
               />
               <Garment
                 kind={p.kind}
@@ -60,9 +60,9 @@ const badgeClass = {
               <div>
                 <h3 class="text-lg font-bold">{p.name}</h3>
                 <p class="mt-1 flex items-baseline gap-2">
-                  <span class="font-display text-xl font-semibold text-blue-700">{formatPrice(p.price)}</span>
+                  <span class="font-display text-xl font-semibold text-link">{formatPrice(p.price)}</span>
                   {p.oldPrice && (
-                    <s class="text-sm text-ink-500">
+                    <s class="text-sm text-muted">
                       <span class="sr-only">Старая цена:</span>
                       {formatPrice(p.oldPrice)}
                     </s>
@@ -71,7 +71,7 @@ const badgeClass = {
               </div>
               <a
                 href="#consult"
-                class="flex size-12 shrink-0 items-center justify-center rounded-full bg-navy-900 text-white transition-colors group-hover:bg-coral-500 group-hover:text-navy-900 after:absolute after:inset-0 after:rounded-card"
+                class="flex size-12 shrink-0 items-center justify-center rounded-full bg-navy-900 text-white transition-colors dark:bg-blue-600 group-hover:bg-coral-500 group-hover:text-navy-900 after:absolute after:inset-0 after:rounded-card"
                 aria-label={`Заказать примерку: ${p.name}`}
               >
                 <Icon name="arrow" class="size-5 -rotate-45" />

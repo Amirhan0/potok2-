@@ -11,7 +11,7 @@ const errorId = `${id}-error`;
 ---
 
 <div class:list={["flex flex-col gap-1", className]} data-field>
-  <label for={id} class="flex cursor-pointer items-start gap-3 text-sm text-ink-500">
+  <label for={id} class="flex cursor-pointer items-start gap-3 text-sm text-muted">
     <input
       id={id}
       name={name}
@@ -25,5 +25,5 @@ const errorId = `${id}-error`;
       <slot />
     </span>
   </label>
-  <p id={errorId} class="min-h-5 text-sm font-medium text-error-600" data-error aria-live="polite"></p>
+  <p id={errorId} class="min-h-5 text-sm font-medium text-error" data-error aria-live="polite"></p>
 </div>

@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Тёмная тема включается атрибутом data-theme="dark" на <html> */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme static {
   --color-navy-900: #0b1f4d;
   --color-blue-700: #1e40af;
@@ -11,6 +14,19 @@
   --color-cream-50: #fff8f1;
   --color-ink-500: #475569;
   --color-error-600: #c2410c; /* текст ошибок: тёплый, но контрастный */
+
+  /* Семантические цвета — меняются в тёмной теме (см. [data-theme="dark"] ниже) */
+  --color-page: #fff8f1; /* фон страницы */
+  --color-surface: #ffffff; /* карточки, светлые секции */
+  --color-field: #ffffff; /* фон полей ввода */
+  --color-fg: #0b1f4d; /* основной текст */
+  --color-muted: #475569; /* второстепенный текст */
+  --color-line: #dbeafe; /* рамки и разделители */
+  --color-tint: #dbeafe; /* мягкие плашки, фон иллюстраций */
+  --color-link: #1e40af; /* ссылки, цены, акцентный текст */
+  --color-error: #c2410c; /* текст ошибок */
+  --color-band: #1e40af; /* яркая синяя секция «Стилист» */
+  --color-outline: #0b1f4d; /* контуры SVG-иллюстраций */
 
   --font-display: "Unbounded Variable", system-ui, sans-serif;
   --font-sans: "Manrope Variable", system-ui, sans-serif;
@@ -42,6 +58,21 @@
   }
 }
 
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-page: #07122b;
+  --color-surface: #0d1d45;
+  --color-field: #132a5e;
+  --color-fg: #e8effc;
+  --color-muted: #a3b3cf;
+  --color-line: #1f3a78;
+  --color-tint: #142b63;
+  --color-link: #8db8ff;
+  --color-error: #ffb49e;
+  --color-band: #15337a;
+  --color-outline: #d6e4ff;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -49,7 +80,7 @@
   }
 
   body {
-    @apply bg-cream-50 font-sans text-navy-900 antialiased;
+    @apply bg-page font-sans text-fg antialiased transition-colors duration-300;
   }
 
   :focus-visible {
@@ -73,7 +104,7 @@
 @layer components {
   /* Базовые стили полей форм */
   .field-input {
-    @apply w-full rounded-2xl border-2 border-blue-100 bg-white px-4 py-3 text-base text-navy-900 transition-colors placeholder:text-ink-500/60 hover:border-blue-400 focus:border-blue-600 focus:outline-none;
+    @apply w-full rounded-2xl border-2 border-line bg-field px-4 py-3 text-base text-fg transition-colors placeholder:text-muted/60 hover:border-blue-400 focus:border-blue-600 focus:outline-none;
   }
 
   .field-input[aria-invalid="true"] {

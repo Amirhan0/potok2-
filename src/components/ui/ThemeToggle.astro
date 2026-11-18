@@ -1,0 +1,46 @@
+---
+import Icon from "../illustrations/Icon.astro";
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  class="flex size-11 items-center justify-center rounded-full border-2 border-line text-fg transition-colors hover:border-blue-400 hover:text-link"
+  aria-label="Включить тёмную тему"
+  title="Сменить тему"
+>
+  <Icon name="moon" class="size-5 dark:hidden" />
+  <Icon name="sun" class="hidden size-5 dark:block" />
+</button>
+
+<script>
+  // Тема: сохранённый выбор пользователя или системная настройка.
+  // Начальное значение ставит inline-скрипт в <head>, чтобы не было мигания.
+  const STORAGE_KEY = "theme";
+  const root = document.documentElement;
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
+  const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+
+  function apply(theme: "light" | "dark") {
+    root.dataset.theme = theme;
+    themeColor?.setAttribute("content", theme === "dark" ? "#07122B" : "#2563EB");
+    document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]").forEach((btn) => {
+      btn.setAttribute("aria-label", theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему");
+    });
+  }
+
+  apply(root.dataset.theme === "dark" ? "dark" : "light");
+
+  document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const next = root.dataset.theme === "dark" ? "light" : "dark";
+      localStorage.setItem(STORAGE_KEY, next);
+      apply(next);
+    }),
+  );
+
+  // Если пользователь сам не выбирал — следуем за системой
+  media.addEventListener("change", (e) => {
+    if (!localStorage.getItem(STORAGE_KEY)) apply(e.matches ? "dark" : "light");
+  });
+</script>
