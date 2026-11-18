@@ -12,10 +12,22 @@ type Props = {
   hint?: string;
   as?: "input" | "select" | "textarea";
   options?: Option[];
+  /** Показывать пометку «необязательно» у необязательных полей */
+  optionalMark?: boolean;
   class?: string;
 } & Omit<HTMLAttributes<"input">, "id" | "class">;
 
-const { id, label, hint, as = "input", options = [], class: className, required, ...rest } = Astro.props;
+const {
+  id,
+  label,
+  hint,
+  as = "input",
+  options = [],
+  optionalMark = true,
+  class: className,
+  required,
+  ...rest
+} = Astro.props;
 const errorId = `${id}-error`;
 const hintId = hint ? `${id}-hint` : undefined;
 const describedBy = [hintId, errorId].filter(Boolean).join(" ");
@@ -24,22 +36,46 @@ const describedBy = [hintId, errorId].filter(Boolean).join(" ");
 <div class:list={["flex flex-col gap-1.5", className]} data-field>
   <label for={id} class="text-sm font-semibold text-navy-900">
     {label}
-    {required ? <span class="text-blue-600" aria-hidden="true">*</span> : <span class="font-normal text-ink-500"> (необязательно)</span>}
+    {required ? (
+      <span class="text-blue-600" aria-hidden="true">
+        *
+      </span>
+    ) : (
+      optionalMark && <span class="font-normal text-ink-500"> (необязательно)</span>
+    )}
   </label>
 
-  {
-    as === "select" ? (
-      <select id={id} class="field-input appearance-none bg-[url('/chevron.svg')] bg-[length:1.25rem] bg-[right_1rem_center] bg-no-repeat pr-12" required={required} aria-describedby={describedBy} {...(rest as HTMLAttributes<"select">)}>
-        <option value="" disabled selected>Выберите вариант</option>
-        {options.map((o) => <option value={o.value}>{o.label}</option>)}
-      </select>
-    ) : as === "textarea" ? (
-      <textarea id={id} class="field-input min-h-28 resize-y" required={required} aria-describedby={describedBy} {...(rest as HTMLAttributes<"textarea">)} />
-    ) : (
-      <input id={id} class="field-input" required={required} aria-describedby={describedBy} {...rest} />
-    )
-  }
+  {as === "select" ? (
+    <select
+      id={id}
+      class="field-input appearance-none bg-[url('/chevron.svg')] bg-[length:1.25rem] bg-[right_1rem_center] bg-no-repeat pr-12"
+      required={required}
+      aria-describedby={describedBy}
+      {...(rest as HTMLAttributes<"select">)}
+    >
+      <option value="" disabled selected>
+        Выберите вариант
+      </option>
+      {options.map((o) => (
+        <option value={o.value}>{o.label}</option>
+      ))}
+    </select>
+  ) : as === "textarea" ? (
+    <textarea
+      id={id}
+      class="field-input min-h-28 resize-y"
+      required={required}
+      aria-describedby={describedBy}
+      {...(rest as HTMLAttributes<"textarea">)}
+    />
+  ) : (
+    <input id={id} class="field-input" required={required} aria-describedby={describedBy} {...rest} />
+  )}
 
-  {hint && <p id={hintId} class="text-xs text-ink-500">{hint}</p>}
+  {hint && (
+    <p id={hintId} class="text-xs text-ink-500">
+      {hint}
+    </p>
+  )}
   <p id={errorId} class="min-h-5 text-sm font-medium text-error-600" data-error aria-live="polite"></p>
 </div>

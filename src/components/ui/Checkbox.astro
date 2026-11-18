@@ -21,7 +21,9 @@ const errorId = `${id}-error`;
       aria-describedby={errorId}
       class="mt-0.5 size-5 shrink-0 cursor-pointer rounded-md accent-blue-600"
     />
-    <span><slot /></span>
+    <span>
+      <slot />
+    </span>
   </label>
   <p id={errorId} class="min-h-5 text-sm font-medium text-error-600" data-error aria-live="polite"></p>
 </div>

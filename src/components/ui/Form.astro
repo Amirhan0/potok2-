@@ -1,0 +1,33 @@
+---
+// Обёртка формы: action, ловушка для ботов, статус и подключение логики
+interface Props {
+  name: string;
+  success?: string;
+  class?: string;
+  label: string;
+}
+
+const { name, success, class: className, label } = Astro.props;
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT || "#";
+---
+
+<form
+  action={endpoint}
+  method="POST"
+  data-form={name}
+  data-success={success}
+  data-state="idle"
+  class:list={["group/form", className]}
+  aria-label={label}
+>
+  <input type="hidden" name="form" value={name} />
+  <div class="absolute -left-[9999px]" aria-hidden="true">
+    <label for={`${name}-website`}>Не заполняйте это поле</label>
+    <input id={`${name}-website`} type="text" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+  <slot />
+</form>
+
+<script>
+  import "../../scripts/forms";
+</script>
