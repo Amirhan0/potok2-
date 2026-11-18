@@ -66,6 +66,7 @@ public/                      # favicon.svg, og-image.png, robots.txt
   --color-coral-300: #FFB49E;  /* мягкий акцент в иллюстрациях */
   --color-cream-50: #FFF8F1;   /* основной фон страницы */
   --color-ink-500: #475569;    /* второстепенный текст */
+  --color-error-600: #C2410C;  /* текст ошибок валидации (coral-500 не проходит по контрасту) */
 
   --font-display: "Unbounded Variable", system-ui, sans-serif;
   --font-sans: "Manrope Variable", system-ui, sans-serif;

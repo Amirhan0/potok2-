@@ -10,6 +10,7 @@
   --color-coral-300: #ffb49e;
   --color-cream-50: #fff8f1;
   --color-ink-500: #475569;
+  --color-error-600: #c2410c; /* текст ошибок: тёплый, но контрастный */
 
   --font-display: "Unbounded Variable", system-ui, sans-serif;
   --font-sans: "Manrope Variable", system-ui, sans-serif;

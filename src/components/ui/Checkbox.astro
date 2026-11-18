@@ -1,0 +1,27 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  required?: boolean;
+  class?: string;
+}
+
+const { id, name, required, class: className } = Astro.props;
+const errorId = `${id}-error`;
+---
+
+<div class:list={["flex flex-col gap-1", className]} data-field>
+  <label for={id} class="flex cursor-pointer items-start gap-3 text-sm text-ink-500">
+    <input
+      id={id}
+      name={name}
+      type="checkbox"
+      value="yes"
+      required={required}
+      aria-describedby={errorId}
+      class="mt-0.5 size-5 shrink-0 cursor-pointer rounded-md accent-blue-600"
+    />
+    <span><slot /></span>
+  </label>
+  <p id={errorId} class="min-h-5 text-sm font-medium text-error-600" data-error aria-live="polite"></p>
+</div>

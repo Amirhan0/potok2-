@@ -1,0 +1,48 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Variant = "primary" | "accent" | "ghost" | "light";
+
+type Props = {
+  variant?: Variant;
+  size?: "md" | "lg";
+  class?: string;
+} & (
+  | ({ href: string } & Omit<HTMLAttributes<"a">, "class">)
+  | ({ href?: undefined } & Omit<HTMLAttributes<"button">, "class">)
+);
+
+const { variant = "primary", size = "md", class: className, href, ...rest } = Astro.props;
+
+const variants: Record<Variant, string> = {
+  primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-600/25",
+  // Белый текст на коралловом не проходит по контрасту — используем navy
+  accent: "bg-coral-500 text-navy-900 hover:bg-coral-300 shadow-lg shadow-coral-500/30",
+  ghost: "border-2 border-navy-900/15 text-navy-900 hover:border-blue-600 hover:text-blue-700",
+  light: "bg-white text-navy-900 hover:bg-blue-100",
+};
+
+const sizes = {
+  md: "px-6 py-3 text-sm",
+  lg: "px-8 py-4 text-base",
+};
+
+const classes = [
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-60",
+  variants[variant],
+  sizes[size],
+  className,
+];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes} {...(rest as HTMLAttributes<"a">)}>
+      <slot />
+    </a>
+  ) : (
+    <button class:list={classes} {...(rest as HTMLAttributes<"button">)}>
+      <slot />
+    </button>
+  )
+}
